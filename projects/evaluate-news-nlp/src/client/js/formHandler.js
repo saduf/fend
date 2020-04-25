@@ -9,9 +9,15 @@ function handleSubmit(event) {
     console.log("formText value: : " + formText);
     let validateInputString = checkForName(formText)
     //let validateInputString = true
+    console.log("::: Form Submitted :::")
+    const polarityEl = document.getElementById('polarity');
+    const subjectivityEl = document.getElementById('subjectivity');
+    const textEl = document.getElementById('text');
+    const p_confidenceEl = document.getElementById('polarity_confidence');
+    const s_confidenceEl = document.getElementById('subjectivity_confidence');
+
     console.log("This is the return value: " + validateInputString)
   if(validateInputString == true) {     
-      console.log("::: Form Submitted :::")
       return postData('http://localhost:8081/sentiment', {inputPhrase: formText})
       //.then(res => res.json())
       .then(function(res) {
@@ -20,20 +26,23 @@ function handleSubmit(event) {
           console.log('Text', res.text);
           console.log('Polarity_Confidence', res.polarity_confidence);
           console.log('Subjectivity_Confidence', res.subjectivity_confidence);
-          document.getElementById('polarity').innerHTML = "Polarity: " + res.polarity
-          document.getElementById('subjectivity').innerHTML = "Subjectivity: " + res.subjectivity
-          document.getElementById('text').innerHTML = "Text: " + res.text
-          document.getElementById('polarity_confidence').innerHTML = "Polarity_Confidence: " + res.polarity_confidence
-          document.getElementById('subjectivity_confidence').innerHTML = "Subjectivity_Confidence: " + res.subjectivity_confidence
+
+          polarityEl.style.color = null;
+          polarityEl.innerHTML = "Polarity: " + `<span style="color:green">${res.polarity}</span>`
+          subjectivityEl.innerHTML = "Subjectivity: " + `<span style="color:green">${res.subjectivity}</span>`
+          textEl.innerHTML = "Text: " + `<span style="color:green">${res.text}</span>`
+          p_confidenceEl.innerHTML = "Polarity_Confidence: " + `<span style="color:green">${res.polarity_confidence}</span>`
+          s_confidenceEl.innerHTML = "Subjectivity_Confidence: " + `<span style="color:green">${res.subjectivity_confidence}</span>`
 
           return res.polarity
       })
     } else {
-      document.getElementById('polarity').innerHTML = "Please enter a valid alphanumeric text, it cannot be empty or compesed only by numbers"
-      document.getElementById('subjectivity').innerHTML = ""
-      document.getElementById('text').innerHTML = ""
-      document.getElementById('polarity_confidence').innerHTML = ""
-      document.getElementById('subjectivity_confidence').innerHTML = ""
+      polarityEl.innerHTML = "Please enter a valid alphanumeric text, it cannot be empty or compesed only by numbers"
+      polarityEl.style.color = 'red'
+      subjectivityEl.innerHTML = ""
+      textEl.innerHTML = ""
+      p_confidenceEl.innerHTML = ""
+      s_confidenceEl.innerHTML = ""
     }
 }
 
