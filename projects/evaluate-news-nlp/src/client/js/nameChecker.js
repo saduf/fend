@@ -1,16 +1,17 @@
 function checkForName(inputText) {
-    console.log("::: Running checkForName :::", inputText);
-    let names = [
-        "Picard",
-        "Janeway",
-        "Kirk",
-        "Archer",
-        "Georgiou"
-    ]
+    
+    let retValue = true;
+    const regex = "\s+[^.!?]*[.!?]";
 
-    if(names.includes(inputText)) {
-        alert("Welcome, Captain!")
+    if (inputText == null || inputText == "" || !inputText.match(regex)) {
+        retValue = false;
     }
+
+    if (inputText.match(/^[0-9]+$/)) {
+            retValue = false;
+    }
+    
+    return retValue;
 }
 
 export { checkForName }

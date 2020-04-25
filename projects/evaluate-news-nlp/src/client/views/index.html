@@ -24,14 +24,19 @@
         <main>
             <section>
                 <form class="" onsubmit="return handleSubmit(event)">
-                    <input id="name" type="text" name="input" value="" onblur="onBlur()" placeholder="Name">
-                    <input type="submit" name="" value="submit" onclick="return handleSubmit(event)" onsubmit="return handleSubmit(event)">
+                    <label for="name">Enter you text to permorm sentiment analysis on it, please include an adequate text for the results to be relevant</label>
+                    <input id="name" type="text" name="input" value="" placeholder="Name">
+                    <input type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return handleSubmit(event)">
                 </form>
             <section>
 
             <section>
                 <strong>Form Results:</strong>
-                <div id="results"></div>
+                <div id="polarity"></div>
+                <div id="subjectivity"></div>
+                <div id="text"></div>
+                <div id="polarity_confidence"></div>
+                <div id="subjectivity_confidence"></div>
             </section>
         </main>
 
